@@ -70,25 +70,69 @@
  *   // => ["red", "blue"]
  */
 export function addColors(element, ...colors) {
-  // Your code here
+  if (!element) {
+    return -1;
+  }
+
+  let count = 0;
+  for (const color of colors) {
+    if (!element.classList.contains(color)) {
+      element.classList.add(color);
+      count += 1;
+    }
+  }
+  return count;
 }
 
 export function removeColors(element, ...colors) {
-  // Your code here
+  if (!element) {
+    return -1;
+  }
+
+  let count = 0;
+  for (const color of colors) {
+    if (element.classList.contains(color)) {
+      element.classList.remove(color);
+      count += 1;
+    }
+  }
+  return count;
 }
 
 export function togglePattern(element, pattern) {
-  // Your code here
+  if (!element) {
+    return null;
+  }
+
+  return element.classList.toggle(`pattern-${pattern}`);
 }
 
 export function hasDesign(element, designName) {
-  // Your code here
+  if (!element) {
+    return false;
+  }
+
+  return element.classList.contains(`design-${designName}`);
 }
 
 export function replaceDesign(element, oldDesign, newDesign) {
-  // Your code here
+  if (!element) {
+    return false;
+  }
+
+  const oldClass = `design-${oldDesign}`;
+  const hadOld = element.classList.contains(oldClass);
+  element.classList.remove(oldClass);
+  element.classList.add(`design-${newDesign}`);
+  return hadOld;
 }
 
 export function getActiveColors(element) {
-  // Your code here
+  if (!element) {
+    return [];
+  }
+
+  return Array.from(element.classList)
+    .filter((className) => className.startsWith('color-'))
+    .map((className) => className.slice(6));
 }
